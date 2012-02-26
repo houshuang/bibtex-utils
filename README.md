@@ -8,6 +8,7 @@ I am planning to expand this, but currently there are just two tools. I would we
 Two different tools for turning selected text into a BibTeX citation, one looks up the [DOI](http://www.doi.org/) reference in [CrossRef](http://crossref.org/), and the other uses the AnystyleParser library to try to heuristically generate a BibTeX citation. 
 
 Usage:
+
 ````ruby
 txt = "doi:10.1503/cmaj.110218"
 result = BibTeX-Utils::Anyparse.parse(txt)
@@ -15,9 +16,29 @@ result = BibTeX-Utils::Anyparse.parse(txt)
 
 txt = "Arguello, J., Butler, B.S., Joyce, E., Kraut, R., Ling, K.S., and Wang, X. Talk to me: foundations for successful individual- group interactions in online communities. Proc. CHI 2006, ACM (2006), 959-968."
 result = BibTeX-Utils::Anyparse.parse(txt)
-=>````
+=>
+```
 
+You can also specify the doi parser or the anystyle parser.
 
+```ruby
+result = BibTeX-Utils::Anyparse.parse(txt, :anystyle)
+result = BibTeX-Utils::Anyparse.parse(txt, :doi)
+```
+
+And you can directly parse the contents of the clipboard
+
+```ruby
+result = BibTeX-Utils::Anyparse.parse(:clipboard)
+result = BibTeX-Utils::Anyparse.parse(:clipboard, :doi)
+```
+
+If you specify :clipboard, you can also use Anyparse.parse!, which writes the changes back to the clipboard (useful if you are going to paste the text into a citation manager, etc.)
+
+```ruby
+BibTeX-Utils::Anyparse.parse!(:clipboard)
+BibTeX-Utils::Anyparse.parse!(:clipboard, :anystyle)
+```
 
 # Contributing to bibtex-utils
  
